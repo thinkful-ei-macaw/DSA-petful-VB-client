@@ -24,9 +24,9 @@ export default function Pets(props){
                     <li>Journey:{props.dog.story}</li>
                 </ul>
                 <button>Adopt me!</button>
-                {/* <ul>
+                <ul>
                     
-                </ul> */}
+                </ul>
             </div>
         )
     
