@@ -39,7 +39,7 @@ export default class AdoptionPage extends React.Component {
     return (
       <div>
         <Pet cat={this.state.cat} dog={this.state.dog}/>
-        {/* <People people={this.state.people} /> */}
+        <People people={this.state.people} />
       </div>
     );
   }

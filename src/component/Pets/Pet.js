@@ -11,7 +11,7 @@ export default function Pets(props){
                     <li>Name:{props.cat.name}</li>
                     <li>Gender: {props.cat.gender}</li>
                     <li>Breed: {props.cat.breed}</li>
-                    <li>Journey:{props.story}</li>
+                    <li>Journey:{props.cat.story}</li>
                 </ul>
 
                 <button>Adopt me!</button>
