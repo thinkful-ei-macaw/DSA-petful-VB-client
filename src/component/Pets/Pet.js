@@ -1,29 +1,33 @@
 import React from 'react';
 
-export default class Pet extends React.Component{
-    render(){
+export default function Pets(props){
+    
+        console.log(props)
         return(
             <div>
                 <ul>
-                    <li>Image:DOG</li>
-                    <li>Description:Broad shouldered, brown eyed, brown coat</li>
-                    <li>Name: Stefano</li>
-                    <li>Gender: Nonbinary</li>
-                    <li>Breed: Bull mastiff</li>
-                    <li>Journey:Rolled up to the shelter on his Harley, smoking a cigarette like a cool cat</li>
+                    <li>Image:<img alt={props.cat.description} src={props.cat.imageURL}/></li>
+                    <li>Description:{props.cat.description}</li>
+                    <li>Name:{props.cat.name}</li>
+                    <li>Gender: {props.cat.gender}</li>
+                    <li>Breed: {props.cat.breed}</li>
+                    <li>Journey:{props.story}</li>
                 </ul>
 
                 <button>Adopt me!</button>
                 <ul>
-                    <li>Image: CAT</li>
-                    <li>Description:Slender and silky coat, super sharp claws</li>
-                    <li>Name: Buggsy</li>
-                    <li>Gender: Female</li>
-                    <li>Breed: Persian</li>
-                    <li>Journey:Carried in by winged angels</li>
+                    <li>Image: <img alt={props.dog.description} src={props.dog.imageURL} /></li>
+                    <li>Description:{props.dog.description}</li>
+                    <li>Name: {props.dog.name}</li>
+                    <li>Gender: {props.dog.gender}</li>
+                    <li>Breed: {props.dog.breed}</li>
+                    <li>Journey:{props.dog.story}</li>
                 </ul>
                 <button>Adopt me!</button>
+                {/* <ul>
+                    
+                </ul> */}
             </div>
         )
-    }
+    
 }
