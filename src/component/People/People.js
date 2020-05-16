@@ -11,6 +11,10 @@ export default function People(props) {
     <div>
       <h3>List of people waiting to adopt</h3>
       <ul>{data}</ul>
+      {props.showSubmitBtn &&<div>
+      <input type="text" placeholder="your name" value={props.name} onChange={props.onChange} />
+      <button onClick={props.onClick}>Submit</button>
+      </div>}
     </div>
   );
 }

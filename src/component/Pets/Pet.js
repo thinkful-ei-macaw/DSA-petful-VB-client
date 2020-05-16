@@ -14,7 +14,7 @@ export default function Pets(props){
                     <li>Journey:{props.cat.story}</li>
                 </ul>
 
-                <button>Adopt me!</button>
+                {props.showAdoptBtn && <button>Adopt me!</button>}
                 <ul>
                     <li>Image: <img alt={props.dog.description} src={props.dog.imageURL} /></li>
                     <li>Description:{props.dog.description}</li>
@@ -23,7 +23,7 @@ export default function Pets(props){
                     <li>Breed: {props.dog.breed}</li>
                     <li>Journey:{props.dog.story}</li>
                 </ul>
-                <button>Adopt me!</button>
+                {props.showAdoptBtn && <button>Adopt me!</button>}
                 <ul>
                     
                 </ul>
