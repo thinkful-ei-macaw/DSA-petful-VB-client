@@ -95,8 +95,13 @@ export default class AdoptionPage extends React.Component {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ person: newPeeps[i] }),
       });
+      let newPeople = this.state.people;
+      newPeople.push(newPeeps[i]);
+      this.setState({
+        people: newPeople,
+      });
       i++;
-      if (this.state.people.length <= 5) {
+      if (this.state.people.length < 7) {
         this.autoAddPeople(i);
       }
     }, 1000);
