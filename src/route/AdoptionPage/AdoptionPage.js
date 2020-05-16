@@ -10,6 +10,7 @@ export default class AdoptionPage extends React.Component {
     people: [],
     name: "",
     showSubmitBtn: true,
+    type:''
   };
   componentDidMount() {
     return this.handleGetPets();
@@ -25,8 +26,8 @@ export default class AdoptionPage extends React.Component {
 
   handleGetPets = () => {
     return Promise.all([
-      fetch(`${Config.API_ENDPOINT}pets`),
-      fetch(`${Config.API_ENDPOINT}people`),
+      fetch(`${Config.CLIENT_ORIGIN}pets`),
+      fetch(`${Config.CLIENT_ORIGIN}people`),
     ])
       .then(([petRes, peopleRes]) => {
         if (!petRes.ok) return petRes.json().then((e) => Promise.reject(e));
@@ -51,7 +52,7 @@ export default class AdoptionPage extends React.Component {
   nameSubmit = () => {
     //submit to server
     //add name to waitlist
-    fetch(`${Config.API_ENDPOINT}people`, {
+    fetch(`${Config.CLIENT_ORIGIN}people`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ person: this.state.name }),
@@ -69,6 +70,7 @@ export default class AdoptionPage extends React.Component {
 
     this.setState({ showSubmitBtn: false });
   };
+  //every 5 seconds remove person + animal 
   autoAdopt = () => {
     setTimeout(() => {
       console.log("hello");
@@ -81,19 +83,30 @@ export default class AdoptionPage extends React.Component {
       });
     }, 2000);
   };
-  adopt = async () => {
-    await this.deletePet();
-    await this.handleGetPets();
-    // .catch((error) => console.log(error));
-  };
 
+  //pass type from selectAnimalBtn 
+  adopt = async (type) => {
+    await this.deletePet(type);
+    await this.handleGetPets();
+  };
+//pass type from adopt to remove selected animal type
   deletePet = (type) => {
-    return fetch(`${Config.API_ENDPOINT}pets`, {
+    return fetch(`${Config.CLIENT_ORIGIN}pets`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type: "cat" }),
+      body: JSON.stringify({ type: type }),
     });
   };
+//get data from btn based on what user clicked on and adopt it
+  selectAnimalBtn=(type)=>{
+    //if type all send request 2x with cat or dog
+    if(type==='all'){
+      this.adopt('cat');
+      this.adopt('dog');
+    }
+    //else adopt just once
+    this.adopt(type);
+  }
 
   render() {
     console.log(this.state.cat);
@@ -103,6 +116,7 @@ export default class AdoptionPage extends React.Component {
           cat={this.state.cat}
           dog={this.state.dog}
           showAdoptBtn={this.showAdoptBtn}
+          selectAnimalBtn={this.selectAnimalBtn}
         />
         <People
           people={this.state.people}
