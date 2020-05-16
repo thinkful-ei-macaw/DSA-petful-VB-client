@@ -10,7 +10,7 @@ export default class AdoptionPage extends React.Component {
     people: [],
     name: "",
     showSubmitBtn: true,
-    type:''
+    type: "",
   };
   componentDidMount() {
     return this.handleGetPets();
@@ -64,13 +64,14 @@ export default class AdoptionPage extends React.Component {
             //if not in front of line do this
             this.autoAdopt();
           }
+          this.autoAddPeople();
         });
       })
       .catch((error) => console.log(error));
 
     this.setState({ showSubmitBtn: false });
   };
-  //every 5 seconds remove person + animal 
+  //every 5 seconds remove person + animal
   autoAdopt = () => {
     setTimeout(() => {
       console.log("hello");
@@ -83,13 +84,30 @@ export default class AdoptionPage extends React.Component {
       });
     }, 2000);
   };
+  addPeeps() {}
+  autoAddPeople = (i = 0) => {
+    let newPeeps = ["Ricky", "Julianne", "Bubbles", "Trevor", "Randy"];
 
-  //pass type from selectAnimalBtn 
+    setTimeout(() => {
+      console.log("more people please");
+      fetch(`${Config.CLIENT_ORIGIN}people`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ person: newPeeps[i] }),
+      });
+      i++;
+      if (this.state.people.length <= 5) {
+        this.autoAddPeople(i);
+      }
+    }, 1000);
+  };
+
+  //pass type from selectAnimalBtn
   adopt = async (type) => {
     await this.deletePet(type);
     await this.handleGetPets();
   };
-//pass type from adopt to remove selected animal type
+  //pass type from adopt to remove selected animal type
   deletePet = (type) => {
     return fetch(`${Config.CLIENT_ORIGIN}pets`, {
       method: "DELETE",
@@ -97,18 +115,18 @@ export default class AdoptionPage extends React.Component {
       body: JSON.stringify({ type: type }),
     });
   };
-//get data from btn based on what user clicked on and adopt it
-  selectAnimalBtn=(type)=>{
+  //get data from btn based on what user clicked on and adopt it
+  selectAnimalBtn = (type) => {
     //if type all send request 2x with cat or dog
-    if(type==='all'){
-      this.adopt('cat');
-      this.adopt('dog');
+    if (type === "all") {
+      this.adopt("cat");
+      this.adopt("dog");
       alert("You have adopted a cat and dog");
     }
     //else adopt just once
     this.adopt(type);
     alert(`You have adopted a ${type}`);
-  }
+  };
 
   render() {
     console.log(this.state.cat);
