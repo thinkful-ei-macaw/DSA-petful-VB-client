@@ -103,9 +103,11 @@ export default class AdoptionPage extends React.Component {
     if(type==='all'){
       this.adopt('cat');
       this.adopt('dog');
+      alert("You have adopted a cat and dog");
     }
     //else adopt just once
     this.adopt(type);
+    alert(`You have adopted a ${type}`);
   }
 
   render() {
