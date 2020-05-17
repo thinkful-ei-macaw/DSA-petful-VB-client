@@ -1,70 +1,69 @@
 # Petful Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+- This shelter is based on a first come first server basis, FOR THE ANIMALS NOT YOU YOU GREEDY HUMAN. You're adopiton options are limited to the pets that have had the longest stay at the shelter out of all the pets in the shelter at the time you are visiting. Please move onto the adoption page and decide if you would like to adopt one of the wonderful pets we currently have available to you. Additionally, you must wait your turn in line before you will be presented with the ability to adopt.
 
-In the project directory, you can run:
+## heroku link:
 
-### `npm start`
+https://petful-server-bv.herokuapp.com/
+##link to live app:
+https://petful-client-liard.now.sh/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Partners: Vendy Prum and Brannen Petit
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Tech-Stack:
 
-### `npm test`
+- ReactJs
+- NodeJs
+- Express
+- HTML
+- JSX
+- CSS
+- queue, linkedlist
+- heroku
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### API Docs:
 
-### `npm run build`
+- POST
+  - REQUEST: https://petful-server-bv.herokuapp.com/people
+  - allows user's to be added to the end of the line
+  - RESPONSE: 201 OK
+- GET
+  - REQUEST: https://petful-server-bv.herokuapp.com/pets
+  - Shows the two most current animals up for adopiton from the queue
+  - RESPONSE: [ {dog:{
+    age: 3,
+    breed: 'Golden Retriever',
+    description: 'A smiling golden-brown golden retreiver listening to music.',
+    gender: 'Male',
+    imageURL: 'https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    name: 'Zim',
+    story: 'Owner Passed away'
+    }}, {cat: {
+    age: 2,
+    breed: 'Bengal',
+    description: 'Orange bengal cat with black stripes lounging on concrete.',
+    gender: 'Female',
+    imageURL:'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    name: 'Steve French',
+    story: 'Thrown on the street'
+    },}]
+- GET
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - REQUEST: https://petful-server-bv.herokuapp.com/people
+  - Retrieves and updates the current people in line to adopt pets
+  - RESPONE: ["Randy","Bubbles","Etc"]
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- DELETE
+  - REQUEST: https://petful-server-bv.herokuapp.com/pets
+  - removes the most recently adopted pet from it's queue
+  - RESPONSE: 204 No content
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Summary
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- This app allows users to view the current animals up for adoption
+- This apps allows users to add their name to the list
+- This app simulates the adoption process before the user can adopt an animal
+- This app provides the user feedback on the animal they chose to adopt
+- Once at the front of line, the user can see other's line up behind them in the queue
