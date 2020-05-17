@@ -26,8 +26,8 @@ export default class AdoptionPage extends React.Component {
 
   handleGetPets = () => {
     return Promise.all([
-      fetch(`${Config.CLIENT_ORIGIN}pets`),
-      fetch(`${Config.CLIENT_ORIGIN}people`),
+      fetch(`${Config.REACT_APP_API_BASE}pets`),
+      fetch(`${Config.REACT_APP_API_BASE}people`),
     ])
       .then(([petRes, peopleRes]) => {
         if (!petRes.ok) return petRes.json().then((e) => Promise.reject(e));
@@ -52,7 +52,7 @@ export default class AdoptionPage extends React.Component {
   nameSubmit = () => {
     //submit to server
     //add name to waitlist
-    fetch(`${Config.CLIENT_ORIGIN}people`, {
+    fetch(`${Config.REACT_APP_API_BASE}people`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ person: this.state.name }),
@@ -91,7 +91,7 @@ export default class AdoptionPage extends React.Component {
     let newPeeps = ["Ricky", "Julianne", "Bubbles", "Trevor", "Randy"];
 
     setTimeout(() => {
-      fetch(`${Config.CLIENT_ORIGIN}people`, {
+      fetch(`${Config.REACT_APP_API_BASE}people`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ person: newPeeps[i] }),
@@ -115,7 +115,7 @@ export default class AdoptionPage extends React.Component {
   };
   //pass type from adopt to remove selected animal type
   deletePet = (type) => {
-    return fetch(`${Config.CLIENT_ORIGIN}pets`, {
+    return fetch(`${Config.REACT_APP_API_BASE}pets`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: type }),
