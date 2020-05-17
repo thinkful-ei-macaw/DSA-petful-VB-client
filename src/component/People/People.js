@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function People(props) {
-  console.log(props.people);
 //iterate through data to get people's names
   const data = props.people.map((x, id) => {
     return <li key={id}>{x}</li>;

@@ -59,12 +59,13 @@ export default class AdoptionPage extends React.Component {
     })
       .then(() => {
         this.handleGetPets().then(() => {
-          console.log("am i at front?", this.showAdoptBtn);
-          if (!this.showAdoptBtn) {
+          if (this.showAdoptBtn) {
+            //if at the front start acting people
+            this.autoAddPeople();
+          } else {
             //if not in front of line do this
             this.autoAdopt();
           }
-          this.autoAddPeople();
         });
       })
       .catch((error) => console.log(error));
@@ -74,11 +75,12 @@ export default class AdoptionPage extends React.Component {
   //every 5 seconds remove person + animal
   autoAdopt = () => {
     setTimeout(() => {
-      console.log("hello");
       this.adopt().then(() => {
-        console.log(this.showAdoptBtn);
-        if (!this.showAdoptBtn) {
-          //if still not in front of line do again!
+        if (this.showAdoptBtn) {
+          //if at the front start acting people
+          this.autoAddPeople();
+        } else {
+          //if not in front of line do this
           this.autoAdopt();
         }
       });
@@ -89,7 +91,6 @@ export default class AdoptionPage extends React.Component {
     let newPeeps = ["Ricky", "Julianne", "Bubbles", "Trevor", "Randy"];
 
     setTimeout(() => {
-      console.log("more people please");
       fetch(`${Config.CLIENT_ORIGIN}people`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -101,7 +102,7 @@ export default class AdoptionPage extends React.Component {
         people: newPeople,
       });
       i++;
-      if (this.state.people.length < 7) {
+      if (this.state.people.length < 5) {
         this.autoAddPeople(i);
       }
     }, 1000);
@@ -124,17 +125,17 @@ export default class AdoptionPage extends React.Component {
   selectAnimalBtn = (type) => {
     //if type all send request 2x with cat or dog
     if (type === "all") {
-      this.adopt("cat");
-      this.adopt("dog");
+      this.adopt(type);
       alert("You have adopted a cat and dog");
+    } else {
+      //else adopt just once
+      this.adopt(type);
+      alert(`You have adopted a ${type}`);
     }
-    //else adopt just once
-    this.adopt(type);
-    alert(`You have adopted a ${type}`);
   };
 
   render() {
-    console.log(this.state.cat);
+    
     return (
       <div>
         <Pet
