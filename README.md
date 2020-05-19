@@ -9,6 +9,10 @@
 https://petful-server-bv.herokuapp.com/
 ##link to live app:
 https://petful-client-liard.now.sh/
+##link to server repo:
+https://github.com/thinkful-ei-macaw/DSA-petful-VB-server
+##link to client repo:
+https://github.com/thinkful-ei-macaw/DSA-petful-VB-client
 
 ## Partners: Vendy Prum and Brannen Petit
 
