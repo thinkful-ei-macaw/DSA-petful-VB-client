@@ -4,7 +4,9 @@ export default function Pets(props) {
 
   return (
     <div>
-      <ul>
+      {console.log('this is the dog props',props.dog)}
+      {props.cat&&<ul>
+        
         <li>
           Image:
           <img alt={props.cat.description} src={props.cat.imageURL} />
@@ -15,10 +17,11 @@ export default function Pets(props) {
         <li>Breed: {props.cat.breed}</li>
         <li>Journey:{props.cat.story}</li>
       </ul>
-
-      {props.showAdoptBtn && (
+      }
+      {props.cat && props.showAdoptBtn && (
         <button onClick={() => props.selectAnimalBtn("cat")}>Adopt this cat!</button>
       )}
+    {props.dog &&
       <ul>
         <li>
           Image: <img alt={props.dog.description} src={props.dog.imageURL} />
@@ -29,7 +32,8 @@ export default function Pets(props) {
         <li>Breed: {props.dog.breed}</li>
         <li>Journey:{props.dog.story}</li>
       </ul>
-      {props.showAdoptBtn && (
+}
+      {props.dog && props.showAdoptBtn && (
         <button onClick={() => props.selectAnimalBtn("dog")}>Adopt this dog!</button>
       )}
       <div>

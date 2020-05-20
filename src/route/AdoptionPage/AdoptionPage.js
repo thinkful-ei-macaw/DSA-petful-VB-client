@@ -11,6 +11,7 @@ export default class AdoptionPage extends React.Component {
     name: "",
     showSubmitBtn: true,
     type: "",
+
   };
   componentDidMount() {
     return this.handleGetPets();
@@ -33,15 +34,21 @@ export default class AdoptionPage extends React.Component {
         if (!petRes.ok) return petRes.json().then((e) => Promise.reject(e));
         if (!peopleRes.ok)
           return peopleRes.json().then((e) => Promise.reject(e));
-
+        console.log(';p;uhuh',petRes)
+        console.log('hehehee', peopleRes)
         return Promise.all([petRes.json(), peopleRes.json()]);
       })
       .then(([petRes, peopleRes]) => {
-        this.setState({
-          dog: petRes[1].dog,
-          cat: petRes[0].cat,
-          people: peopleRes,
-        });
+        console.log('kiiijjijji', peopleRes)
+        console.log('ijijijij',petRes)
+          
+          this.setState({
+            dog: petRes[1] ? petRes[1].dog:null,
+            cat: petRes[0] ? petRes[0].cat:null,
+            people: peopleRes ? peopleRes : [],
+          })
+
+        
       })
       .catch((error) => console.log({ error }));
   };
@@ -75,7 +82,14 @@ export default class AdoptionPage extends React.Component {
   //every 5 seconds remove person + animal
   autoAdopt = () => {
     setTimeout(() => {
-      this.adopt().then(() => {
+      let deciding = Math.floor(Math.random() * 2)
+      let type;
+      if(deciding === 0){
+        type = 'cat'
+      } else if(deciding===1){
+        type = 'dog'
+      }
+      this.adopt(type).then(() => {
         if (this.showAdoptBtn) {
           //if at the front start acting people
           this.autoAddPeople();
